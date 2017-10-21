@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel">
+                <div class="panel-heading c_deepPurpleG500to300">
+                    <h3 class="panel-title">User profile</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <a class="list-group-item">
+                            <div class="row-picture">
+                                <img class="circle" ng-src="{{user.avatar}}" alt="icon">
+                            </div>
+                            <div class="row-content">
+                                <h4 class="list-group-item-heading">
+                                    {{user.username}}
+                                    <span ng-show="user.validated" class="badge badge-secondary c_deepPurpleG500to300">Validated</span>
+                                </h4>
+
+                                <p class="list-group-item-text">{{user.description}}</p>
+                            </div>
+                        </a>
+                    </div>
+                    <p>
+                        {{user.email}}
+                    </p>
+                    <p>
+                        {{user.telegram}}
+                    </p>
+                    <p>
+                        {{user.phone}}
+                    </p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading c_deepPurpleG500to300">
+                    <h3 class="panel-title">User received likes ({{user.likes.length}})</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <a ng-repeat="user in likes" ng-href="#!/user/{{user._id}}" class="list-group-item">
+                            <div class="row-picture">
+                                <img class="circle" ng-src="{{user.avatar}}" alt="icon">
+                            </div>
+                            <div class="row-content">
+                                <h4 class="list-group-item-heading">{{user.username}}</h4>
+
+                                <p class="list-group-item-text">{{user.description}}</p>
+                            </div>
+                            <div class="list-group-separator"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel">
+                <div class="panel-heading c_deepPurpleG500to300">
+                    <h3 class="panel-title">User travels</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>User</th>
+                                <th>nºJoins</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="travel in user.travels">
+                                <td>
+                                    <i ng-show="travel.type=='offering'" class="fa fa-car fa-2x"></i>
+                                    <i ng-show="travel.type=='asking'" class="fa fa-question fa-2x"></i>
+                                    <i ng-show="travel.type=='package'" class="fa fa-archive fa-2x"></i>
+                                </td>
+                                <td>{{travel.title}}</td>
+                                <td>{{travel.date | date}}</td>
+                                <td>
+                                    <a ng-href="#!/user/{{travel.user._id}}">
+                                        {{travel.user.username}}
+                                    </a>
+                                </td>
+                                <td>{{travel.joins.length}}</td>
+                                <td><a ng-href="#!/travel/{{travel._id}}">View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-2">
+            <div class="panel">
+                <div class="panel-heading c_deepPurple500">
+                    <h3 class="panel-title">Admin actions</h3>
+                </div>
+                <div class="panel-body">
+                    <!--<div class="btn btn-block btn-sm c_orange300">Ban user</div>-->
+                    <div ng-show="!user.validated" ng-click="validateUser()" class="btn btn-block btn-sm c_deepPurpleG500to300">Validate User</div>
+                    <div ng-show="user.validated">Validated by: {{user.validatedBy.username}}</div>
+                    <div ng-show="user.validated" ng-click="unvalidateUser()" class="btn btn-block btn-sm c_red200">Unvalidate User</div>
+                    <div ng-click="deleteUser()" class="btn btn-block btn-sm c_red300">Delete user</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
