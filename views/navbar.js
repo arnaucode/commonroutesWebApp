@@ -23,8 +23,8 @@ angular.module('app.navbar', ['ngRoute'])
             window.location.href = "#!/search/" + $scope.searchString;
         };
         if (localStorage.getItem("cr_webapp_userdata")) {
-          $scope.storageuser = JSON.parse(localStorage.getItem("cr_webapp_userdata"));
-          console.log($scope.storageuser);
+            $scope.storageuser = JSON.parse(localStorage.getItem("cr_webapp_userdata"));
+            console.log($scope.storageuser);
         }
 
         $scope.logout = function() {

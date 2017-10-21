@@ -1,0 +1,52 @@
+<div class="form-group label-floating">
+    <input ng-model="travel.title" abmFormControl class="form-control" placeholder="Title" type="text">
+</div>
+<div class="row">
+    <div class="form-group label-floating col-md-6">
+        <input ng-model="travel.from.name" abmFormControl class="form-control" placeholder="From" type="text">
+    </div>
+    <div class="form-group label-floating col-md-6">
+        <input ng-model="travel.to.name" abmFormControl class="form-control" placeholder="To" type="text">
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group label-floating col-md-7">
+        <input ng-model="travel.date" abmFormControl class="form-control" placeholder="Date" type="date">
+    </div>
+    <div class="form-group label-floatin col-md-5">
+        <input class="form-control" type="time" name="usr_time" ng-model="travel.hour">
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4">
+        <input class="form-control" type="number" name="seats" min="1" max="20" ng-model="travel.seats" placeholder="nºSeats">
+    </div>
+    <div class="col-md-8">
+        <div class="form-group label-floating">
+            <!--<input ng-model="travel.package" abmFormControl class="form-control" placeholder="Can carry package" type="text">-->
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" ng-model="travel.package"> Can carry package
+            </label>
+        </div>
+        <div class="form-group label-floating">
+            <!--<input ng-model="travel.collectivized" abmFormControl class="form-control" placeholder="Collectivized" type="text">-->
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" ng-model="travel.collectivized"> Collectivized
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group label-floating">
+    <input ng-model="travel.description" abmFormControl class="form-control" placeholder="Description" type="text">
+</div>
+
+<p class="padding" ng-show="allParametersCompleted()">
+    <button ng-click="closeNewOfferingTravel()" class="btn btn-raised c_grey500">
+         Cancel
+      </button>
+    <button ng-click="doNewTravel()" class="btn btn-raised c_deepPurple300 pull-right">
+         Create travel
+      </button>
+</p>
+</form>

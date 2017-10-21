@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <button ng-click="selectType('offering')" type="button" class="btn btn-outline-success">Offering travel</button><br>
+            <button ng-click="selectType('asking')" type="button" class="btn btn-outline-success">Asking travel</button><br>
+            <button ng-click="selectType('package')" type="button" class="btn btn-outline-success">Asking package</button>
+        </div>
+        <div class="col-sm-10">
+            <div class="panel">
+                <div class="panel-heading c_deepPurpleG500to300">
+                    <h3 class="panel-title">
+                        <i ng-show="travel.type=='offering'" title="offering" class="fa fa-car fa-2x"></i>
+                        <i ng-show="travel.type=='asking'" title="asking" class="fa fa-question fa-2x"></i>
+                        <i ng-show="travel.type=='package'" title="package" class="fa fa-archive fa-2x"></i>
+                        <i style="margin-right: 20px;"></i>
+                        New {{travel.type}} travel
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div ng-include="'views/newTravel/newofferingForm.html'"></div>
+                        </div>
+                        <div class="col-sm-8">
+                            <leaflet width="100%" height="500px" markers="markers" center="center"
+                            tiles="tiles" id="map-simple-map"></leaflet>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

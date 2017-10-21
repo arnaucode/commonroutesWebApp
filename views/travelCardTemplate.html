@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-body" style="color:#ffffff; background-image: url('img/userProfileBackground.png');">
+        <div class="pull-right">{{travel.date | date}}</div>
+        <h4 class="card-title">
+            <i ng-show="travel.type=='offering'" title="offering" class="fa fa-car fa-2x"></i>
+            <i ng-show="travel.type=='asking'" title="asking" class="fa fa-question fa-2x"></i>
+            <i ng-show="travel.type=='package'" title="package" class="fa fa-archive fa-2x"></i>
+            <i style="margin-right: 20px;"></i>
+            <b>{{travel.title}}</b>
+        </h4>
+    </div>
+    <div class="card-body">
+        <div class="pull-right">
+            <a ng-href="#!/user/{{travel.user._id}}">
+                <img class="circle" style="max-width: 30px; max-height:30px;" ng-src="{{travel.user.avatar}}" />
+                {{travel.user.username}}
+            </a>
+        </div>
+        <p>
+            From: <b>{{travel.from.name}}</b>
+        </p>
+        <p>
+            To: <b>{{travel.to.name}}</b>
+        </p>
+        <p>
+            Seats: {{travel.joins.length}}/{{travel.seats}}
+        </p>
+        <p ng-show="travel.package">
+            Can transport package
+        </p>
+    </div>
+</div>
