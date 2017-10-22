@@ -10,7 +10,9 @@ angular.module('app.travel', ['ngRoute', 'ui-leaflet'])
     }])
 
     .controller('TravelCtrl', function($scope, $http, $routeParams,
-        leafletData, leafletBoundsHelpers) {
+        leafletData, leafletBoundsHelpers, toastr) {
+
+        $scope.storageuser = JSON.parse(localStorage.getItem("cr_webapp_userdata"));
         $scope.travel = {};
 
 
@@ -68,12 +70,141 @@ angular.module('app.travel', ['ngRoute', 'ui-leaflet'])
                 .then(function(data) {
                         console.log(data);
                         $scope.travels = data.data;
+                          toastr.info('Travel deleted');
 
                         window.location = "#!/main/";
                     },
                     function(data) { // optional
                         // failed
+                          toastr.error('Error on delete travel');
                     });
+        };
+
+        $scope.joinTravel = function() {
+          $http({
+              url: urlapi + 'travels/join/' + $routeParams.travelid,
+              method: "POST",
+              data: {}
+            })
+            .then(function(data) {
+                console.log("data: ");
+                console.log(data);
+                if (data.data.success == false) {
+                  toastr.error('Error on join');
+                } else {
+                  $scope.travel = data.data;
+                    toastr.success('Joined travel');
+                }
+              },
+              function(response) { // optional
+                // failed
+              });
+        };
+        $scope.unjoinTravel = function() {
+          $http({
+              url: urlapi + 'travels/unjoin/' + $routeParams.travelid,
+              method: "POST",
+              data: {}
+            })
+            .then(function(data) {
+                console.log("data: ");
+                console.log(data);
+                if (data.data.success == false) {
+                  toastr.error('Error on unjoin');
+                } else {
+                  $scope.travel = data.data;
+                    toastr.success('Unjoined travel');
+                }
+              },
+              function(response) { // optional
+                // failed
+              });
+        };
+
+        $scope.declineJoin = function(joinPetition) {
+          $http({
+              url: urlapi + 'travels/declineJoin/' + $routeParams.travelid,
+              method: "POST",
+              data: {
+                userid: joinPetition._id
+              }
+            })
+            .then(function(data) {
+                console.log("data: ");
+                console.log(data);
+                if (data.data.success == false) {
+                  toastr.error('Error on declining');
+                } else {
+                  $scope.travel = data.data;
+                  console.log("success");
+                  toastr.success('Join declined');
+                }
+              },
+              function(response) { // optional
+                // failed
+              });
+        };
+
+        $scope.acceptJoin = function(joinPetition) {
+          $http({
+              url: urlapi + 'travels/acceptJoin/' + $routeParams.travelid,
+              method: "POST",
+              data: {
+                userid: joinPetition._id
+              }
+            })
+            .then(function(data) {
+                console.log("data: ");
+                console.log(data);
+                if (data.data.success == false) {
+                  toastr.error('Error on accepting');
+                } else {
+                  $scope.travel = data.data;
+                  console.log("success");
+                  toastr.success('Join accepted');
+                }
+              },
+              function(response) { // optional
+                // failed
+              });
+        };
+
+        $scope.leaveTravel = function() {
+
+          $http({
+              url: urlapi + 'travels/leave/' + $routeParams.travelid,
+              method: "POST",
+              data: {}
+            })
+            .then(function(data) {
+                console.log("data: ");
+                console.log(data);
+                if (data.data.success == false) {
+                  toastr.error('Error on leave');
+                } else {
+                  $scope.travel = data.data;
+                  toastr.success('Travel leaved');
+                }
+              },
+              function(response) { // optional
+                // failed
+              });
+        };
+
+
+        $scope.userHasJoined = function(myArray, searchTerm) {
+          //console.log(myArray+", "+searchTerm);
+          if (myArray) {
+            for (var i = 0, len = myArray.length; i < len; i++) {
+              //console.log(myArray[i] + " - " + searchTerm);
+              if (myArray[i]._id === searchTerm) {
+                //console.log("i: " + i);
+                return i;
+              }
+            }
+          }
+          //console.log("i: -1");
+          return -1;
         };
 
     });

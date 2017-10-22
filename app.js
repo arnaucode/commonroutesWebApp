@@ -19,7 +19,8 @@ angular.module('webapp', [
   'app.users',
   'app.user',
   'app.travel',
-  'app.newTravel'
+  'app.newTravel',
+  'app.notifications'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
