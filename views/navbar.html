@@ -1,5 +1,5 @@
 <div ng-controller="NavbarCtrl">
-    <div ng-show="storageuser" class="navbar c_deepPurpleG500to300">
+    <nav ng-show="storageuser" class="navbar navbar-fixed-top c_deepPurpleG500to300">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -31,6 +31,12 @@
                             <i title="Post new travel" class="fa fa-plus fa-2x"></i>
                         </a>
                     </li>
+                    <li>
+                        <a ng-href="#!/user/{{storageuser._id}}">
+                            <img class="circle" ng-src="{{storageuser.avatar}}" style="max-width:30px; max-height:30px;" alt="icon">
+                            {{storageuser.username}}
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i title="Post new travel" class="fa fa-cog fa-2x"></i>
@@ -52,7 +58,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <!--
 <div ng-click="goBack()" class="btn"><span class="glyphicon glyphicon-arrow-left"></span> Back</div>
 -->

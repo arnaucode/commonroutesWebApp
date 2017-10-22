@@ -13,8 +13,7 @@
                             </div>
                             <div class="row-content">
                                 <h4 class="list-group-item-heading">
-                                    {{user.username}}
-                                    <span ng-show="user.validated" class="badge badge-secondary c_deepPurpleG500to300">Validated</span>
+                                    {{user.username}} <i ng-show="user.validated" class="fa fa-check-circle ct_blue300" title="user validated"></i>
                                 </h4>
 
                                 <p class="list-group-item-text">{{user.description}}</p>
@@ -25,36 +24,54 @@
                         {{user.email}}
                     </p>
                     <p>
-                        {{user.telegram}}
+                        <a ng-show="user.telegram" ng-href="https://t.me/{{user.telegram}}" target="_blank" class="ct_deepPurple300">
+                            <i class="fa fa-telegram fa-2x"></i> @{{user.telegram}}
+                        </a>
                     </p>
-                    <p>
-                        {{user.phone}}
+                    <p ng-show="user.phone">
+                        <i class="fa fa-phone fa-2x"></i> {{user.phone}}
                     </p>
                 </div>
-            </div>
-            <div class="panel">
-                <div class="panel-heading c_deepPurpleG500to300">
-                    <h3 class="panel-title">User received likes ({{user.likes.length}})</h3>
+                <div class="text-right">
+                    <a ng-href="#!/userLikes/{{user._id}}" class="ct_deepPurple300">
+                        {{user.likes.length}} likes
+                    </a>
+                    <div ng-show="arrayObjectIndexOf(user.likes, storageuser._id)==-1"
+                    ng-click="likeUser()" class="btn" title="click to like user">
+                        <i class="fa fa-heart fa-2x"></i> Like
+                    </div>
+                    <div ng-show="arrayObjectIndexOf(user.likes, storageuser._id)>-1"
+                    ng-click="unlikeUser()" class="btn" title="click to unlike user">
+                        <i class="fa fa-heart fa-2x ctext_red600"></i> Unlike
+                    </div>
+
                 </div>
                 <div class="panel-body">
-                    <div class="list-group">
-                        <a ng-repeat="user in likes" ng-href="#!/user/{{user._id}}" class="list-group-item">
-                            <div class="row-picture">
-                                <img class="circle" ng-src="{{user.avatar}}" alt="icon">
-                            </div>
-                            <div class="row-content">
-                                <h4 class="list-group-item-heading">{{user.username}}</h4>
-
-                                <p class="list-group-item-text">{{user.description}}</p>
-                            </div>
-                            <div class="list-group-separator"></div>
-                        </a>
-                    </div>
+                    <img ng-src="{{user.faircoin}}" class="img-responsive">
+                    {{user.faircoinString}}
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="panel">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div ng-repeat="travel in user.travels" ng-if="$index % 2 == 0">
+                        <a ng-href="#!/travel/{{travel._id}}">
+                            <div ng-include="'views/travelCardTemplate.html'"></div>
+                        </a>
+                        <br>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div ng-repeat="travel in user.travels" ng-if="$index % 2 == 1">
+                        <a ng-href="#!/travel/{{travel._id}}">
+                            <div ng-include="'views/travelCardTemplate.html'"></div>
+                        </a>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="panel">
                 <div class="panel-heading c_deepPurpleG500to300">
                     <h3 class="panel-title">User travels</h3>
                 </div>
@@ -90,23 +107,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="col-sm-2">
-            <div class="panel">
-                <div class="panel-heading c_deepPurple500">
-                    <h3 class="panel-title">Admin actions</h3>
-                </div>
-                <div class="panel-body">
-                    <!--<div class="btn btn-block btn-sm c_orange300">Ban user</div>-->
-                    <div ng-show="!user.validated" ng-click="validateUser()" class="btn btn-block btn-sm c_deepPurpleG500to300">Validate User</div>
-                    <div ng-show="user.validated">Validated by: {{user.validatedBy.username}}</div>
-                    <div ng-show="user.validated" ng-click="unvalidateUser()" class="btn btn-block btn-sm c_red200">Unvalidate User</div>
-                    <div ng-click="deleteUser()" class="btn btn-block btn-sm c_red300">Delete user</div>
-                </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

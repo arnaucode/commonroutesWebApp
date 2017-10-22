@@ -11,7 +11,7 @@
     </div>
     <div class="card-body">
         <div class="pull-right">
-            <a ng-href="#!/user/{{travel.user._id}}">
+            <a ng-href="#!/user/{{travel.user._id}}" class="btn" style="text-transform:none;" ng-show="travel.user">
                 <img class="circle" style="max-width: 30px; max-height:30px;" ng-src="{{travel.user.avatar}}" />
                 {{travel.user.username}}
             </a>

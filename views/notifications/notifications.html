@@ -24,8 +24,8 @@
                         </a>
                         <a ng-repeat="notification in notifications | orderBy: '-date'" ng-show="notification.state=='viewed'" class="list-group-item" href="#!/{{notification.link}}">
                           <div class="pull-right">
-                            <div class="o_text_purple600">{{notification.date | date:"dd/MM"}}</div>
-                            <div class="o_text_purple600">{{notification.date | date:"HH:mm:ss"}}</div>
+                            <div class="">{{notification.date | date:"dd/MM"}}</div>
+                            <div class="">{{notification.date | date:"HH:mm:ss"}}</div>
                           </div>
                           <i ng-show="notification.state=='viewed'" class="icon {{notification.icon}}"></i>
                           <h2>{{notification.message}}</h2>

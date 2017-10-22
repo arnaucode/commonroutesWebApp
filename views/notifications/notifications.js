@@ -23,6 +23,7 @@ angular.module('app.notifications', ['ngRoute'])
             }
             //store the notifications
             localStorage.setItem("cr_webapp_notifications", JSON.stringify($scope.notifications));
+            console.log($scope.notifications);
 
           }, function(data) {
             console.log('data error');

@@ -11,7 +11,7 @@ angular.module('app.signup', ['ngRoute'])
 
 .controller('SignupCtrl', function($scope, $http, $routeParams) {
     $scope.user = {};
-    $scope.doLogin = function() {
+    $scope.doSignup = function() {
       console.log('Doing login', $scope.user);
 
       $http({

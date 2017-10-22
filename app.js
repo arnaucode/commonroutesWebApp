@@ -18,6 +18,7 @@ angular.module('webapp', [
   'app.travels',
   'app.users',
   'app.user',
+  'app.userLikes',
   'app.travel',
   'app.newTravel',
   'app.notifications'

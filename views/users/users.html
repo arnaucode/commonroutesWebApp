@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row">
+        <div class="col-sm-3"></div>
         <div class="col-sm-6">
             <div class="panel">
                 <div class="panel-heading c_deepPurpleG500to300">
@@ -17,7 +18,7 @@
                             <div class="row-content">
                                 <h4 class="list-group-item-heading">
                                     {{user.username}}
-                                    <span ng-show="user.validated" class="badge badge-secondary c_deepPurpleG500to300">Validated</span>
+                                     <i ng-show="user.validated" class="fa fa-check-circle ct_blue300" title="user validated"></i>
                                 </h4>
 
                                 <p class="list-group-item-text">{{user.description}}</p>
@@ -32,16 +33,7 @@
         </div>
 
         <div class="col-sm-2">
-            <div class="panel">
-                <div class="panel-heading c_deepPurpleG500to300">
-                    <h3 class="panel-title">Actions</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="btn btn-block btn-sm c_green300">Create user</div>
-                    <div class="btn btn-block btn-sm c_blue300">Create travel</div>
-                    <a href="#!/network" class="btn btn-block btn-sm c_deepPurpleG500to300">View network</a>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

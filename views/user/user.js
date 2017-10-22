@@ -9,7 +9,9 @@ angular.module('app.user', ['ngRoute'])
         });
     }])
 
-    .controller('UserCtrl', function($scope, $http, $routeParams) {
+    .controller('UserCtrl', function($scope, $http, $routeParams, toastr) {
+        $scope.storageuser = JSON.parse(localStorage.getItem("cr_webapp_userdata"));
+
         $scope.user = {};
         $scope.likes = {};
         $http.get(urlapi + 'users/id/' + $routeParams.userid)
@@ -32,46 +34,55 @@ angular.module('app.user', ['ngRoute'])
                 $scope.$broadcast('scroll.refreshComplete'); //refresher stop
             });
 
-        //delete user
-        $scope.deleteUser = function() {
-            console.log("delete user: " + $routeParams.userid);
-            $http({
-                    url: urlapi + 'admin/users/id/' + $routeParams.userid,
-                    method: "DELETE"
+            $scope.likeUser = function() {
+              $http({
+                  //url: urlapi + 'users/'+ $stateParams.username+'/fav',
+                  url: urlapi + 'users/id/like/' + $scope.user._id,
+                  method: "POST",
+                  data: {}
                 })
                 .then(function(data) {
-                        window.location = "#!/main/";
-                    },
-                    function(data) { // optional
-                        // failed
-                    });
-        };
-        $scope.validateUser = function() {
-            $http({
-                    url: urlapi + 'admin/users/validate/id/' + $routeParams.userid,
-                    method: "POST",
-                    data: {}
+                    // success
+                    if (data.data.success == false) {
+                      console.log("failed");
+                     toastr.error("Error on like");
+                    } else {
+                      $scope.user = data.data; // for UI
+                    }
+                  },
+                  function(response) { // optional
+                    // failed
+                  });
+            };
+            $scope.unlikeUser = function() {
+              $http({
+                  //url: urlapi + 'users/'+ $stateParams.username+'/fav',
+                  url: urlapi + 'users/id/unlike/' + $scope.user._id,
+                  method: "POST",
+                  data: {}
                 })
                 .then(function(data) {
-                        /*window.location = "#!/main/";*/
-                        $scope.user = data.data;
-                    },
-                    function(data) { // optional
-                        // failed
-                    });
-        };
-        $scope.unvalidateUser = function() {
-            $http({
-                    url: urlapi + 'admin/users/unvalidate/id/' + $routeParams.userid,
-                    method: "POST",
-                    data: {}
-                })
-                .then(function(data) {
-                        /*window.location = "#!/main/";*/
-                        $scope.user = data.data;
-                    },
-                    function(data) { // optional
-                        // failed
-                    });
-        };
+                    // success
+                    if (data.data.success == false) {
+                      console.log("failed");
+                     toastr.error("Error on unlike");
+                    } else {
+                      $scope.user = data.data; // for UI
+                    }
+                  },
+                  function(response) { // optional
+                    // failed
+                  });
+            };
+
+            $scope.arrayObjectIndexOf = function(myArray, searchTerm) {
+              if (myArray) {
+                for (var i = 0, len = myArray.length; i < len; i++) {
+                  if (myArray[i] === searchTerm) {
+                    return i;
+                  }
+                }
+              }
+              return -1;
+            };
     });
